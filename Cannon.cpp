@@ -7,3 +7,5 @@ Cannon::Cannon(sf::Vector2f position, sf::Color color)
     shape.setPosition(position);
     shape.setFillColor(color);
 }
+
+void Cannon::resetLives() { lives = INITIAL_LIVES; }

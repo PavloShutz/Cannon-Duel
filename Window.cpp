@@ -58,3 +58,7 @@ void Window::EndDraw() {
 void Window::Draw(sf::Drawable& l_drawable) {
 	m_window.draw(l_drawable);
 }
+
+sf::Vector2u Window::GetSize() const {
+	return { m_window.getSize() };
+}

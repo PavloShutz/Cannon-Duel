@@ -1,6 +1,7 @@
 #include "Game.h"
+#include <iostream>
 
-Game::Game() : m_window("Cannon Duel", sf::Vector2u(800, 600))
+Game::Game() :  m_window("Cannon Duel", sf::Vector2u(800, 600))
 {
     m_gameRunning = true;
 	LoadFont();
@@ -67,6 +68,9 @@ void Game::Update() {
         if (m_cannon1.lives <= 0 || m_cannon2.lives <= 0)
             m_gameRunning = false;
     }
+    else
+        // check restart area
+        checkRestart(m_cannon1, m_cannon2);
 }
 
 void Game::Render() {
@@ -85,7 +89,11 @@ void Game::Render() {
     drawText(m_font, "Red Lives: " + std::to_string(m_cannon2.lives), { 600, 10 }, 20, sf::Color::Red);
 
     if (!m_gameRunning) {
+        std::string winner = (m_cannon1.lives == 0 ? "Red" : "Blue");
+        sf::Color winnerColor = (winner == "Red" ? sf::Color::Red : sf::Color::Blue);
+        drawText(m_font, winner + " wins!", { 300, 100 }, 100, winnerColor);
         drawText(m_font, "Game Over!", { 300, 250 }, 50, sf::Color::White);
+        drawText(m_font, "Press 'Space' to restart game", { 300, 350 }, 25, sf::Color::White);
     }
 	m_window.EndDraw();
 }
@@ -129,5 +137,16 @@ void generateBullet(Cannon& cannon, std::vector<sf::RectangleShape>& bullets,
         bullet.setFillColor(color);
         bullets.push_back(bullet);
         cannon.shootCooldown = SHOOT_COOLDOWN;
+    }
+}
+
+void Game::checkRestart(Cannon& l_cannon1, Cannon& l_cannon2) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && !m_gameRunning)
+    {
+        m_gameRunning = true;
+        l_cannon1.resetLives();
+        l_cannon2.resetLives();
+        m_bullets1.clear();
+        m_bullets2.clear();
     }
 }

@@ -12,6 +12,8 @@ public:
 
 	void Draw(sf::Drawable& l_drawable);
 
+	sf::Vector2u GetSize() const;
+
 	void BeginDraw(); // Clear the window.
 	void EndDraw(); // Display the contents.
 

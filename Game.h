@@ -19,6 +19,8 @@ public:
 		const std::string& text, sf::Vector2f position,
 		unsigned int size, sf::Color color);
 
+	void checkRestart(Cannon& l_cannon1, Cannon& l_cannon2);
+
 private:
 	int LoadFont();
 
@@ -39,10 +41,6 @@ private:
 };
 
 bool checkCollision(const sf::RectangleShape& a, const sf::RectangleShape& b);
-
-//void drawText(sf::RenderWindow& window, const sf::Font& font,
-//	const std::string& text, sf::Vector2f position,
-//	unsigned int size, sf::Color color);
 
 void moveBullets(std::vector<sf::RectangleShape>& bullets, int direction, float deltaTime);
 

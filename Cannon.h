@@ -15,5 +15,7 @@ struct Cannon {
     float shootCooldown;
 
     Cannon(sf::Vector2f position, sf::Color color);
+
+    void resetLives();
 };
 #endif
