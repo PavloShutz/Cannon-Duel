@@ -123,9 +123,9 @@ void checkHitCannon(std::vector<sf::RectangleShape>& bullets, std::vector<sf::Ci
 }
 
 void movePlayer(Cannon& cannon, sf::Keyboard::Key up, sf::Keyboard::Key down, float deltaTime) {
-    if (sf::Keyboard::isKeyPressed(up) && cannon.shape.getPosition().y > 0)
+    if (sf::Keyboard::isKeyPressed(up) && cannon.cannonSprite.getPosition().y > 0)
         cannon.cannonSprite.move(0, -CANNON_SPEED * deltaTime);
-    if (sf::Keyboard::isKeyPressed(down) && cannon.shape.getPosition().y < 600 - CANNON_SIZE.y)
+    if (sf::Keyboard::isKeyPressed(down) && cannon.cannonSprite.getPosition().y < 600 - CANNON_SIZE.y)
         cannon.cannonSprite.move(0, CANNON_SPEED * deltaTime);
 }
 

@@ -27,8 +27,8 @@ private:
 	Window m_window;
 	sf::Font m_font;
 	
-	Cannon m_cannon1{ { 50, 300 - CANNON_SIZE.y / 2 }, sf::Color::Blue, "images/shipL.jpg"};
-	Cannon m_cannon2{ {750 - CANNON_SIZE.x, 300 - CANNON_SIZE.y / 2}, sf::Color::Red, "images/shipR.png"};
+	Cannon m_cannon1{ { 50, 300 - CANNON_SIZE.y / 2 }, "images/shipL.jpg"};
+	Cannon m_cannon2{ {750 - CANNON_SIZE.x, 300 - CANNON_SIZE.y / 2}, "images/shipR.png"};
 
 	std::vector<sf::RectangleShape> m_bullets1;
 	std::vector<sf::RectangleShape> m_bullets2;
