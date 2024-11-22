@@ -42,6 +42,8 @@ private:
 	sf::Sprite rebelsSprite;
 
 	sf::Music music;
+	sf::SoundBuffer explosionBuffer;
+	sf::Sound explosionSound;
 
 	Fighter m_tiefighter{ 
 		{ 50, (WINDOW_HEIGHT / 2) - FIGHTER_SIZE.y / 2 },

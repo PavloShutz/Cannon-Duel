@@ -21,6 +21,9 @@ Game::Game() :  m_window("Cannon Duel", sf::Vector2u(WINDOW_WIDTH, WINDOW_HEIGHT
 
     // sounds
     music.openFromFile("sound/music.mp3");
+    explosionBuffer.loadFromFile("sound/explosion.mp3");
+    explosionSound.setBuffer(explosionBuffer);
+    music.setLoop(true);
     music.play();
 
     LoadFont();
@@ -92,7 +95,13 @@ void Game::Update() {
         checkHitFighter(m_bullets2, m_tiefighter);
 
         if (m_tiefighter.lives <= 0 || m_starfighter.lives <= 0)
+        {
+            music.stop();
+            m_tiefighter.lives <= 0 ? m_tiefighter.fighterTexture.loadFromFile("images/explosion.png") :
+                m_starfighter.fighterTexture.loadFromFile("images/explosion.png");
+            explosionSound.play();
             m_gameRunning = false;
+        }
     }
     else
         checkRestart(m_tiefighter, m_starfighter);
@@ -169,7 +178,10 @@ void Game::checkRestart(Fighter& l_fighter1, Fighter& l_fighter2) {
         m_gameRunning = true;
         l_fighter1.resetLives();
         l_fighter2.resetLives();
+        l_fighter1.fighterTexture.loadFromFile("images/tiefighter.png");
+        l_fighter2.fighterTexture.loadFromFile("images/starfighter.png");
         m_bullets1.clear();
         m_bullets2.clear();
+        music.play();
     }
 }
