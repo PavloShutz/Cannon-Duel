@@ -28,10 +28,17 @@ private:
 	int LoadFont();
 
 	Window m_window;
-	sf::Font m_font;
+	sf::Font m_livesFont;
+	sf::Font m_winFont;
 	
 	sf::Texture bgTexture;
 	sf::Sprite bgSprite;
+
+	sf::Texture empireTexture;
+	sf::Sprite empireSprite;
+
+	sf::Texture rebelsTexture;
+	sf::Sprite rebelsSprite;
 
 	Fighter m_tiefighter{ 
 		{ 50, (WINDOW_HEIGHT / 2) - FIGHTER_SIZE.y / 2 },

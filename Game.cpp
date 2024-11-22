@@ -4,9 +4,22 @@
 Game::Game() :  m_window("Cannon Duel", sf::Vector2u(WINDOW_WIDTH, WINDOW_HEIGHT))
 {
     m_gameRunning = true;
+    
+    // background
     bgTexture.loadFromFile("images/bg.png");
     bgSprite.setTexture(bgTexture);
-	LoadFont();
+	
+    // empire
+    empireTexture.loadFromFile("images/empire.png");
+    empireSprite.setTexture(empireTexture);
+    empireSprite.setPosition(0.2 * WINDOW_WIDTH, 0.3 * WINDOW_HEIGHT);
+
+    // rebels
+    rebelsTexture.loadFromFile("images/rebels.png");
+    rebelsSprite.setTexture(rebelsTexture);
+    rebelsSprite.setPosition(0.2 * WINDOW_WIDTH, 0.3 * WINDOW_HEIGHT);
+
+    LoadFont();
 }
 
 Game::~Game() {}
@@ -22,7 +35,16 @@ void Game::HandleInput(float deltaTime) {
 }
 
 int Game::LoadFont() {
-	if (!m_font.loadFromFile("C:/Windows/Fonts/arial.ttf")) {
+#ifdef _WIN32
+    if (!m_winFont.loadFromFile("starjout/Starjout.ttf")) {
+        return -1;
+    }
+#elif _MAC
+    if (!m_winFont.loadFromFile("__MACOSX/starjout/._Starjout.ttf")) {
+        return -1;
+    }
+#endif
+	if (!m_livesFont.loadFromFile("anakinmono.ttf")) {
 		return -1;
 	}
 	return 0;
@@ -87,15 +109,17 @@ void Game::Render() {
     for (auto& explosion : m_explosions)
         m_window.Draw(explosion);
 
-    drawText(m_font, "Blue Lives: " + std::to_string(m_tiefighter.lives), {10, 10}, 20, sf::Color::Blue);
-    drawText(m_font, "Red Lives: " + std::to_string(m_starfighter.lives), { 600, 10 }, 20, sf::Color::Red);
+    drawText(m_livesFont, "Lives: " + std::to_string(m_tiefighter.lives), {10, 10}, 30, sf::Color(2, 250, 71));
+    drawText(m_livesFont, "Lives: " + std::to_string(m_starfighter.lives), { WINDOW_WIDTH - 200, 10 }, 30, sf::Color(250, 2, 2));
 
     if (!m_gameRunning) {
-        std::string winner = (m_tiefighter.lives == 0 ? "Red" : "Blue");
-        sf::Color winnerColor = (winner == "Red" ? sf::Color::Red : sf::Color::Blue);
-        drawText(m_font, winner + " wins!", { 300, 100 }, 100, winnerColor);
-        drawText(m_font, "Game Over!", { 300, 250 }, 50, sf::Color::White);
-        drawText(m_font, "Press 'Space' to restart game", { 300, 350 }, 25, sf::Color::White);
+        std::string winner = (m_tiefighter.lives == 0 ? "Rebellion" : "Empire");
+        sf::Color winnerColor = (winner == "Rebellion" ? sf::Color(250, 2, 2) : sf::Color(158, 60, 60));
+        m_window.Draw((winner == "Rebellion" ? rebelsSprite : empireSprite));
+        drawText(m_winFont, winner + " wins!",
+            { 0.2 * WINDOW_WIDTH + 300, 0.3 * WINDOW_HEIGHT + 40 }, 120, winnerColor
+        );
+        drawText(m_livesFont, "Press 'Space' to restart game", { 0.2 * WINDOW_WIDTH + 100, 0.3 * WINDOW_HEIGHT + 300 }, 50, sf::Color::Black);
     }
 	m_window.EndDraw();
 }
