@@ -14,11 +14,11 @@ Game::~Game() {}
 void Game::HandleInput(float deltaTime) {
     // left player
     movePlayer(m_cannon1, sf::Keyboard::W, sf::Keyboard::S, deltaTime);
-    generateBullet(m_cannon1, m_bullets1, sf::Keyboard::D, sf::Color::Blue, CANNON_SIZE.x);
+    generateBullet(m_cannon1, m_bullets1, sf::Keyboard::D, sf::Color(2, 250, 71), CANNON_SIZE.x);
     
     // right player
     movePlayer(m_cannon2, sf::Keyboard::Up, sf::Keyboard::Down, deltaTime);
-    generateBullet(m_cannon2, m_bullets2, sf::Keyboard::Left, sf::Color::Red, -BULLET_SIZE.x);
+    generateBullet(m_cannon2, m_bullets2, sf::Keyboard::Left, sf::Color(250, 2, 2), -BULLET_SIZE.x);
 }
 
 int Game::LoadFont() {
