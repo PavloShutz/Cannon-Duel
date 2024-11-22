@@ -1,9 +1,12 @@
 #ifndef GAME_H
 #define GAME_H
 #include "Window.h"
-#include "Cannon.h"
+#include "Fighter.h"
 #include <vector>
 #include <sstream>
+
+constexpr int WINDOW_WIDTH  = 1920;
+constexpr int WINDOW_HEIGHT = 1080;
 
 class Game {
 public:
@@ -19,7 +22,7 @@ public:
 		const std::string& text, sf::Vector2f position,
 		unsigned int size, sf::Color color);
 
-	void checkRestart(Cannon& l_cannon1, Cannon& l_cannon2);
+	void checkRestart(Fighter& l_cannon1, Fighter& l_cannon2);
 
 private:
 	int LoadFont();
@@ -30,8 +33,14 @@ private:
 	sf::Texture bgTexture;
 	sf::Sprite bgSprite;
 
-	Cannon m_cannon1{ { 50, 300 - CANNON_SIZE.y / 2 }, "images/tiefighter.png"};
-	Cannon m_cannon2{ {750 - CANNON_SIZE.x, 300 - CANNON_SIZE.y / 2}, "images/starfighter.png"};
+	Fighter m_tiefighter{ 
+		{ 50, (WINDOW_HEIGHT / 2) - FIGHTER_SIZE.y / 2 },
+		"images/tiefighter.png"
+	};
+	Fighter m_starfighter{
+		{ (WINDOW_WIDTH - 50) - FIGHTER_SIZE.x, (WINDOW_HEIGHT / 2) - FIGHTER_SIZE.y / 2},
+		"images/starfighter.png"
+	};
 
 	std::vector<sf::RectangleShape> m_bullets1;
 	std::vector<sf::RectangleShape> m_bullets2;
@@ -43,14 +52,14 @@ private:
 	bool m_gameRunning;
 };
 
-bool checkCollision(const sf::RectangleShape& bullet, const sf::Sprite& cannon);
+bool checkCollision(const sf::RectangleShape& bullet, const sf::Sprite& fighter);
 
 void moveBullets(std::vector<sf::RectangleShape>& bullets, int direction, float deltaTime);
 
-void checkHitCannon(std::vector<sf::RectangleShape>& bullets, std::vector<sf::CircleShape>& explosions, Cannon& cannon);
+void checkHitFighter(std::vector<sf::RectangleShape>& bullets, std::vector<sf::CircleShape>& explosions, Fighter& fighter);
 
-void movePlayer(Cannon& cannon, sf::Keyboard::Key up, sf::Keyboard::Key down, float deltaTime);
+void movePlayer(Fighter& fighter, sf::Keyboard::Key up, sf::Keyboard::Key down, float deltaTime);
 
-void generateBullet(Cannon& cannon, std::vector<sf::RectangleShape>& bullets,
+void generateBullet(Fighter& fighter, std::vector<sf::RectangleShape>& bullets,
 	sf::Keyboard::Key shoot, sf::Color color, float offset);
 #endif

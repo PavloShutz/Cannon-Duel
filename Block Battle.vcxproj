@@ -72,12 +72,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\SFML-2.6.1\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\SFML-2.6.1\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\SFML-2.6.2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\SFML-2.6.2\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>D:\SFML-2.6.1\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\SFML-2.6.1\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\SFML-2.6.2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\SFML-2.6.2\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -140,13 +140,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Cannon.cpp" />
+    <ClCompile Include="Fighter.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Cannon.h" />
+    <ClInclude Include="Fighter.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
