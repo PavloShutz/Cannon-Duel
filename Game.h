@@ -27,8 +27,8 @@ private:
 	Window m_window;
 	sf::Font m_font;
 	
-	Cannon m_cannon1{ { 50, 300 - CANNON_SIZE.y / 2 }, sf::Color::Blue };
-	Cannon m_cannon2{ {750 - CANNON_SIZE.x, 300 - CANNON_SIZE.y / 2}, sf::Color::Red };
+	Cannon m_cannon1{ { 50, 300 - CANNON_SIZE.y / 2 }, sf::Color::Blue, "images/shipL.jpg"};
+	Cannon m_cannon2{ {750 - CANNON_SIZE.x, 300 - CANNON_SIZE.y / 2}, sf::Color::Red, "images/shipR.png"};
 
 	std::vector<sf::RectangleShape> m_bullets1;
 	std::vector<sf::RectangleShape> m_bullets2;
@@ -40,7 +40,7 @@ private:
 	bool m_gameRunning;
 };
 
-bool checkCollision(const sf::RectangleShape& a, const sf::RectangleShape& b);
+bool checkCollision(const sf::RectangleShape& bullet, const sf::Sprite& cannon);
 
 void moveBullets(std::vector<sf::RectangleShape>& bullets, int direction, float deltaTime);
 

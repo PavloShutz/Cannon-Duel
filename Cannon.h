@@ -11,10 +11,12 @@ constexpr int INITIAL_LIVES = 3;
 
 struct Cannon {
     sf::RectangleShape shape;
+    sf::Texture cannonTexture;
+    sf::Sprite cannonSprite;
     int lives;
     float shootCooldown;
 
-    Cannon(sf::Vector2f position, sf::Color color);
+    Cannon(sf::Vector2f position, sf::Color color, std::string path);
 
     void resetLives();
 };

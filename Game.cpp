@@ -75,8 +75,8 @@ void Game::Update() {
 
 void Game::Render() {
 	m_window.BeginDraw();
-    m_window.Draw(m_cannon1.shape);
-    m_window.Draw(m_cannon2.shape);
+    m_window.Draw(m_cannon1.cannonSprite);
+    m_window.Draw(m_cannon2.cannonSprite);
 
     for (auto& bullet : m_bullets1)
         m_window.Draw(bullet);
@@ -98,8 +98,8 @@ void Game::Render() {
 	m_window.EndDraw();
 }
 
-bool checkCollision(const sf::RectangleShape& a, const sf::RectangleShape& b) {
-    return a.getGlobalBounds().intersects(b.getGlobalBounds());
+bool checkCollision(const sf::RectangleShape& bullet, const sf::Sprite& cannon) {
+    return bullet.getGlobalBounds().intersects(cannon.getGlobalBounds());
 }
 
 void moveBullets(std::vector<sf::RectangleShape>& bullets, int direction, float deltaTime) {
@@ -109,12 +109,12 @@ void moveBullets(std::vector<sf::RectangleShape>& bullets, int direction, float 
 
 void checkHitCannon(std::vector<sf::RectangleShape>& bullets, std::vector<sf::CircleShape>& explosions, Cannon& cannon) {
     for (auto& bullet : bullets) {
-        if (checkCollision(bullet, cannon.shape)) {
+        if (checkCollision(bullet, cannon.cannonSprite)) {
             cannon.lives--;
             explosions.push_back(sf::CircleShape(20, 20));
             explosions.back().setFillColor(sf::Color::Yellow);
-            explosions.back().setPosition(cannon.shape.getPosition());
-            if (cannon.shape.getPosition().x - 400 > 0)
+            explosions.back().setPosition(cannon.cannonSprite.getPosition());
+            if (cannon.cannonSprite.getPosition().x - 400 > 0)
                 bullet.setPosition(-100, -100);
             else
                 bullet.setPosition(1000, 1000);
@@ -124,16 +124,16 @@ void checkHitCannon(std::vector<sf::RectangleShape>& bullets, std::vector<sf::Ci
 
 void movePlayer(Cannon& cannon, sf::Keyboard::Key up, sf::Keyboard::Key down, float deltaTime) {
     if (sf::Keyboard::isKeyPressed(up) && cannon.shape.getPosition().y > 0)
-        cannon.shape.move(0, -CANNON_SPEED * deltaTime);
+        cannon.cannonSprite.move(0, -CANNON_SPEED * deltaTime);
     if (sf::Keyboard::isKeyPressed(down) && cannon.shape.getPosition().y < 600 - CANNON_SIZE.y)
-        cannon.shape.move(0, CANNON_SPEED * deltaTime);
+        cannon.cannonSprite.move(0, CANNON_SPEED * deltaTime);
 }
 
 void generateBullet(Cannon& cannon, std::vector<sf::RectangleShape>& bullets,
     sf::Keyboard::Key shoot,  sf::Color color, float offset) {
     if (sf::Keyboard::isKeyPressed(shoot) && cannon.shootCooldown <= 0) {
         sf::RectangleShape bullet(BULLET_SIZE);
-        bullet.setPosition(cannon.shape.getPosition().x + offset, cannon.shape.getPosition().y + CANNON_SIZE.y / 2 - BULLET_SIZE.y / 2);
+        bullet.setPosition(cannon.cannonSprite.getPosition().x + offset, cannon.cannonSprite.getPosition().y + CANNON_SIZE.y / 2 - BULLET_SIZE.y / 2);
         bullet.setFillColor(color);
         bullets.push_back(bullet);
         cannon.shootCooldown = SHOOT_COOLDOWN;
