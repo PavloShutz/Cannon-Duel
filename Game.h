@@ -4,6 +4,7 @@
 #include "Fighter.h"
 #include <vector>
 #include <sstream>
+#include <SFML/Audio.hpp>
 
 constexpr int WINDOW_WIDTH  = 1920;
 constexpr int WINDOW_HEIGHT = 1080;
@@ -39,6 +40,8 @@ private:
 
 	sf::Texture rebelsTexture;
 	sf::Sprite rebelsSprite;
+
+	sf::Music music;
 
 	Fighter m_tiefighter{ 
 		{ 50, (WINDOW_HEIGHT / 2) - FIGHTER_SIZE.y / 2 },

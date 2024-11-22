@@ -19,6 +19,10 @@ Game::Game() :  m_window("Cannon Duel", sf::Vector2u(WINDOW_WIDTH, WINDOW_HEIGHT
     rebelsSprite.setTexture(rebelsTexture);
     rebelsSprite.setPosition(0.2 * WINDOW_WIDTH, 0.3 * WINDOW_HEIGHT);
 
+    // sounds
+    music.openFromFile("sound/music.mp3");
+    music.play();
+
     LoadFont();
 }
 
@@ -36,15 +40,15 @@ void Game::HandleInput(float deltaTime) {
 
 int Game::LoadFont() {
 #ifdef _WIN32
-    if (!m_winFont.loadFromFile("starjout/Starjout.ttf")) {
+    if (!m_winFont.loadFromFile("fonts/starjout/Starjout.ttf")) {
         return -1;
     }
 #elif _MAC
-    if (!m_winFont.loadFromFile("__MACOSX/starjout/._Starjout.ttf")) {
+    if (!m_winFont.loadFromFile("fonts/__MACOSX/starjout/._Starjout.ttf")) {
         return -1;
     }
 #endif
-	if (!m_livesFont.loadFromFile("anakinmono.ttf")) {
+	if (!m_livesFont.loadFromFile("fonts/anakinmono.ttf")) {
 		return -1;
 	}
 	return 0;
