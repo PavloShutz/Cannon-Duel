@@ -84,10 +84,8 @@ void Game::Update() {
             [](const sf::RectangleShape& bullet) { return bullet.getPosition().x < 0; }),
             m_bullets2.end());
 
-        checkHitFighter(m_bullets1, m_explosions, m_starfighter);
-        checkHitFighter(m_bullets2, m_explosions, m_tiefighter);
-
-        if (!m_explosions.empty()) m_explosions.erase(m_explosions.begin());
+        checkHitFighter(m_bullets1, m_starfighter);
+        checkHitFighter(m_bullets2, m_tiefighter);
 
         if (m_tiefighter.lives <= 0 || m_starfighter.lives <= 0)
             m_gameRunning = false;
@@ -106,8 +104,6 @@ void Game::Render() {
         m_window.Draw(bullet);
     for (auto& bullet : m_bullets2)
         m_window.Draw(bullet);
-    for (auto& explosion : m_explosions)
-        m_window.Draw(explosion);
 
     drawText(m_livesFont, "Lives: " + std::to_string(m_tiefighter.lives), {10, 10}, 30, sf::Color(2, 250, 71));
     drawText(m_livesFont, "Lives: " + std::to_string(m_starfighter.lives), { WINDOW_WIDTH - 200, 10 }, 30, sf::Color(250, 2, 2));
@@ -133,13 +129,10 @@ void moveBullets(std::vector<sf::RectangleShape>& bullets, int direction, float 
         bullet.move(direction * BULLET_SPEED * deltaTime, 0);
 }
 
-void checkHitFighter(std::vector<sf::RectangleShape>& bullets, std::vector<sf::CircleShape>& explosions, Fighter& fighter) {
+void checkHitFighter(std::vector<sf::RectangleShape>& bullets, Fighter& fighter) {
     for (auto& bullet : bullets) {
         if (checkCollision(bullet, fighter.fighterSprite)) {
             fighter.lives--;
-            explosions.push_back(sf::CircleShape(20, 20));
-            explosions.back().setFillColor(sf::Color::Yellow);
-            explosions.back().setPosition(fighter.fighterSprite.getPosition());
             if (fighter.fighterSprite.getPosition().x - (WINDOW_WIDTH / 2) > 0)
                 bullet.setPosition(-WINDOW_WIDTH, -100);
             else

@@ -52,8 +52,6 @@ private:
 	std::vector<sf::RectangleShape> m_bullets1;
 	std::vector<sf::RectangleShape> m_bullets2;
 
-	std::vector<sf::CircleShape> m_explosions;
-
 	sf::Clock m_clock;
 
 	bool m_gameRunning;
@@ -63,7 +61,7 @@ bool checkCollision(const sf::RectangleShape& bullet, const sf::Sprite& fighter)
 
 void moveBullets(std::vector<sf::RectangleShape>& bullets, int direction, float deltaTime);
 
-void checkHitFighter(std::vector<sf::RectangleShape>& bullets, std::vector<sf::CircleShape>& explosions, Fighter& fighter);
+void checkHitFighter(std::vector<sf::RectangleShape>& bullets, Fighter& fighter);
 
 void movePlayer(Fighter& fighter, sf::Keyboard::Key up, sf::Keyboard::Key down, float deltaTime);
 
