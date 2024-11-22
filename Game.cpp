@@ -4,6 +4,8 @@
 Game::Game() :  m_window("Cannon Duel", sf::Vector2u(800, 600))
 {
     m_gameRunning = true;
+    bgTexture.loadFromFile("images/bg.png");
+    bgSprite.setTexture(bgTexture);
 	LoadFont();
 }
 
@@ -75,6 +77,7 @@ void Game::Update() {
 
 void Game::Render() {
 	m_window.BeginDraw();
+    m_window.Draw(bgSprite);
     m_window.Draw(m_cannon1.cannonSprite);
     m_window.Draw(m_cannon2.cannonSprite);
 
