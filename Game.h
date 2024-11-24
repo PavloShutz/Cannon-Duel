@@ -26,7 +26,12 @@ public:
 	void checkRestart(Fighter& l_cannon1, Fighter& l_cannon2);
 
 private:
-	int LoadFont();
+	int LoadFonts();
+
+	void LoadTextures();
+	void SetupSprites();
+	void LoadAudio();
+	void SetupAudio();
 
 	Window m_window;
 	sf::Font m_livesFont;

@@ -1,41 +1,58 @@
 #include "Game.h"
 #include <iostream>
 
-Game::Game() :  m_window("Cannon Duel", sf::Vector2u(WINDOW_WIDTH, WINDOW_HEIGHT))
+Game::Game() :  m_window("Star Duel", sf::Vector2u(WINDOW_WIDTH, WINDOW_HEIGHT))
 {
     m_gameRunning = true;
     
-    // background
+    LoadTextures();
+    SetupSprites();
+
+    LoadAudio();
+    SetupAudio();
+
+    LoadFonts();
+}
+
+Game::~Game() {}
+
+void Game::LoadTextures()
+{
     bgTexture.loadFromFile("images/bg.png");
-    bgSprite.setTexture(bgTexture);
-	
-    // empire
+
     empireTexture.loadFromFile("images/empire.png");
+
+    rebelsTexture.loadFromFile("images/rebels.png");
+}
+
+void Game::SetupSprites()
+{
+    bgSprite.setTexture(bgTexture);
+
     empireSprite.setTexture(empireTexture);
     empireSprite.setPosition(0.2 * WINDOW_WIDTH, 0.3 * WINDOW_HEIGHT);
 
-    // rebels
-    rebelsTexture.loadFromFile("images/rebels.png");
     rebelsSprite.setTexture(rebelsTexture);
     rebelsSprite.setPosition(0.2 * WINDOW_WIDTH, 0.3 * WINDOW_HEIGHT);
+}
 
-    // sounds
+void Game::LoadAudio()
+{
     music.openFromFile("sound/music.mp3");
     explosionBuffer.loadFromFile("sound/explosion.mp3");
     empireBuffer.loadFromFile("sound/empire.mp3");
     rebelsBuffer.loadFromFile("sound/rebels.mp3");
+}
 
+void Game::SetupAudio()
+{
     explosionSound.setBuffer(explosionBuffer);
     explosionSound.setVolume(40.f);
     empireSound.setBuffer(empireBuffer);
     rebelsSound.setBuffer(rebelsBuffer);
     music.setLoop(true);
     music.play();
-
-    LoadFont();
 }
-
-Game::~Game() {}
 
 void Game::HandleInput(float deltaTime) {
     // left player
@@ -47,7 +64,7 @@ void Game::HandleInput(float deltaTime) {
     generateBullet(m_starfighter, m_bullets2, sf::Keyboard::Left, sf::Color(250, 2, 2), -BULLET_SIZE.x);
 }
 
-int Game::LoadFont() {
+int Game::LoadFonts() {
 #ifdef _WIN32
     if (!m_winFont.loadFromFile("fonts/starjout/Starjout.ttf")) {
         return -1;
