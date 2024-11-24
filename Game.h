@@ -45,6 +45,12 @@ private:
 	sf::SoundBuffer explosionBuffer;
 	sf::Sound explosionSound;
 
+	sf::SoundBuffer empireBuffer;
+	sf::Sound empireSound;
+
+	sf::SoundBuffer rebelsBuffer;
+	sf::Sound rebelsSound;
+
 	Fighter m_tiefighter{ 
 		{ 50, (WINDOW_HEIGHT / 2) - FIGHTER_SIZE.y / 2 },
 		"images/tiefighter.png"

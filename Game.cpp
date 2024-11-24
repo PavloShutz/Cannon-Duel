@@ -22,7 +22,13 @@ Game::Game() :  m_window("Cannon Duel", sf::Vector2u(WINDOW_WIDTH, WINDOW_HEIGHT
     // sounds
     music.openFromFile("sound/music.mp3");
     explosionBuffer.loadFromFile("sound/explosion.mp3");
+    empireBuffer.loadFromFile("sound/empire.mp3");
+    rebelsBuffer.loadFromFile("sound/rebels.mp3");
+
     explosionSound.setBuffer(explosionBuffer);
+    explosionSound.setVolume(40.f);
+    empireSound.setBuffer(empireBuffer);
+    rebelsSound.setBuffer(rebelsBuffer);
     music.setLoop(true);
     music.play();
 
@@ -100,6 +106,10 @@ void Game::Update() {
             m_tiefighter.lives <= 0 ? m_tiefighter.fighterTexture.loadFromFile("images/explosion.png") :
                 m_starfighter.fighterTexture.loadFromFile("images/explosion.png");
             explosionSound.play();
+            if (m_tiefighter.lives <= 0)
+                rebelsSound.play();
+            else
+                empireSound.play();
             m_gameRunning = false;
         }
     }
