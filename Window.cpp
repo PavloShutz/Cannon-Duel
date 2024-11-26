@@ -34,6 +34,9 @@ void Window::Update() {
 			if (event.key.code == sf::Keyboard::F5) {
 				ToggleFullscreen();
 			}
+			if (event.key.code == sf::Keyboard::Escape) {
+				m_isDone = true;
+			}
 		}
 	}
 }

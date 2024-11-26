@@ -1,0 +1,14 @@
+IT'S A QUICK GUIDE ON HOW TO PLAY THIS GAME
+
+1. Goal
+	* Destroy opponent's fighter
+	* Stay alive
+	* Get some fun :)
+
+2. Controls
+	* F5 - toggle fullscreen mode
+	* ESC - exit game
+	* W, A - move up/down (left player)
+	* Arrows UP/DOWN - move up/down (right player)
+	* D - shoot (left player)
+	* Arrow LEFT - shoot (right player)
