@@ -50,6 +50,7 @@ void Game::SetupAudio()
     explosionSound.setVolume(40.f);
     empireSound.setBuffer(empireBuffer);
     rebelsSound.setBuffer(rebelsBuffer);
+    rebelsSound.setVolume(40.f);
     music.setLoop(true);
     music.play();
 }
